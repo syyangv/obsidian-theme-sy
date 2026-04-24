@@ -15,7 +15,7 @@
   src: url("fonts/Loucos_Lyne_-_thesimssansbold.otf") format("opentype");
   font-weight: 700;
   font-display: swap;
-  /* Latin + basic punctuation only — CJK falls through to ZCOOL KuaiLe / Noto Sans SC */
+  /* Latin + basic punctuation only — CJK falls through to LXGW WenKai */
   unicode-range: U+0000-007F, U+00A0-00FF, U+2000-206F, U+2070-209F, U+20A0-20CF, U+2100-214F;
 }
 @font-face {
@@ -27,15 +27,29 @@
 }
 
 /* -------------------------------------------------------------------------
-   Mandarin (Simplified Chinese) support
-   ZCOOL KuaiLe — chunky, playful, closest to Sims Sans energy. Display only.
-   Noto Sans SC  — body/UI fallback, full weight range, complete coverage.
-   Loaded from Google Fonts so the repo stays slim. The unicode-range caps on
-   "Sims Sans" above guarantee CJK codepoints fall through to these faces,
-   so a line like `你好，模拟市民！` renders in the in-game-flavored face
-   while Latin text still uses Sims Sans.
+   Mandarin (Simplified/Traditional Chinese) support
+   LXGW WenKai — handwritten kaiti; playful-but-legible; bundled locally
+   from fonts/LXGWWenKaiTC-{Light,Regular,Bold}.ttf. Used for all CJK
+   glyphs via the unicode-range cascade above (Sims Sans has no CJK).
    ------------------------------------------------------------------------- */
-@import url("https://fonts.googleapis.com/css2?family=ZCOOL+KuaiLe&family=Noto+Sans+SC:wght@400;500;700;900&display=swap");
+@font-face {
+  font-family: "LXGW WenKai";
+  src: url("fonts/LXGWWenKaiTC-Light.ttf") format("truetype");
+  font-weight: 300;
+  font-display: swap;
+}
+@font-face {
+  font-family: "LXGW WenKai";
+  src: url("fonts/LXGWWenKaiTC-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "LXGW WenKai";
+  src: url("fonts/LXGWWenKaiTC-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-display: swap;
+}
 
 :root {
   /* ---------------------------------------------------------------------------
@@ -126,14 +140,14 @@
      friendly, slightly rounded) for display and Nunito for UI/body — both
      come from Google Fonts and match the in-game vibe closely.
      --------------------------------------------------------------------------- */
-  --font-display:   "Sims Sans", "ZCOOL KuaiLe", "Fredoka", "Noto Sans SC", "Nunito", system-ui, sans-serif;
-  --font-display-sc:"Sims Sans SC", "Sims Sans", "ZCOOL KuaiLe", "Fredoka", "Noto Sans SC", sans-serif;
-  --font-ui:        "Nunito", "Sims Sans", "Noto Sans SC", system-ui, sans-serif;
-  --font-body:      "Nunito", "Sims Sans", "Noto Sans SC", system-ui, sans-serif;
-  --font-mono:      "JetBrains Mono", "Fira Code", "Noto Sans SC", ui-monospace, monospace;
-  --font-simlish:   "Sims Sans SC", "Sims Sans", "ZCOOL KuaiLe", cursive;
-  --font-cjk-display: "ZCOOL KuaiLe", "Noto Sans SC", sans-serif;
-  --font-cjk-body:    "Noto Sans SC", "Nunito", sans-serif;
+  --font-display:   "Sims Sans", "Fredoka", "LXGW WenKai", "Nunito", system-ui, sans-serif;
+  --font-display-sc:"Sims Sans SC", "Sims Sans", "LXGW WenKai", "Fredoka", sans-serif;
+  --font-ui:        "Nunito", "Sims Sans", "LXGW WenKai", system-ui, sans-serif;
+  --font-body:      "Nunito", "Sims Sans", "LXGW WenKai", system-ui, sans-serif;
+  --font-mono:      "JetBrains Mono", "Fira Code", ui-monospace, monospace;
+  --font-simlish:   "Sims Sans SC", "Sims Sans", "LXGW WenKai", cursive;
+  --font-cjk-display: "LXGW WenKai", sans-serif;
+  --font-cjk-body:    "LXGW WenKai", "Nunito", sans-serif;
 
   /* Type scale — friendly, rounded, slightly oversized like Sims tooltips */
   --fs-xs:   12px;

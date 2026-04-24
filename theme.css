@@ -1,7 +1,7 @@
 /* =============================================================================
    SY Theme — "Plumbob" — The Sims 4-inspired theme for Obsidian
    Author: SY
-   Version: 0.1.1
+   Version: 0.1.2
 
    Tokens below are the merged contents of colors_and_type.css. Obsidian runs
    in Electron and cannot @import another local CSS from a theme, so the design
@@ -18,17 +18,22 @@
    uncomment the @font-face blocks below. Until then, the cascade falls through
    to Sims Sans -> system-ui, which still reads correctly.
 ----------------------------------------------------------------------------- */
+/* Sims Sans — Latin-only. unicode-range caps coverage so CJK codepoints
+   fall through to LXGW WenKai / system CJK instead of
+   rendering as tofu boxes in a face that has no CJK glyphs. */
 @font-face {
   font-family: "Sims Sans";
   src: url("fonts/Loucos_Lyne_-_thesimssansbold.otf") format("opentype");
   font-weight: 700;
   font-display: swap;
+  unicode-range: U+0000-007F, U+00A0-00FF, U+2000-206F, U+2070-209F, U+20A0-20CF, U+2100-214F;
 }
 @font-face {
   font-family: "Sims Sans SC";
   src: url("fonts/Loucos_Lyne_-_thesimssansboldsc.otf") format("opentype");
   font-weight: 700;
   font-display: swap;
+  unicode-range: U+0000-007F, U+00A0-00FF, U+2000-206F, U+2070-209F, U+20A0-20CF, U+2100-214F;
 }
 /* JetBrains Mono — bundled locally (variable + italic). */
 @font-face {
@@ -46,7 +51,27 @@
   font-display: swap;
 }
 
-/* Fredoka — display face (variable weight + width). */
+/* LXGW WenKai TC — CJK display face (Light, Regular, Bold).
+   Handwritten-feel kaiti; reads as playful-but-legible, matches the
+   friendly Sims energy for 模拟市民, 知识库, daily-note titles, etc. */
+@font-face {
+  font-family: "LXGW WenKai";
+  src: url("fonts/LXGWWenKaiTC-Light.ttf") format("truetype");
+  font-weight: 300;
+  font-display: swap;
+}
+@font-face {
+  font-family: "LXGW WenKai";
+  src: url("fonts/LXGWWenKaiTC-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "LXGW WenKai";
+  src: url("fonts/LXGWWenKaiTC-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-display: swap;
+}
 @font-face {
   font-family: "Fredoka";
   src: url("fonts/Fredoka-VariableFont_wdth,wght.ttf") format("truetype-variations");
@@ -150,10 +175,10 @@
   --status-info:    var(--sim-teal-200);
 
   /* --- Type scale ------------------------------------------------------ */
-  --font-display:   "Sims Sans", "Fredoka", "Nunito", system-ui, sans-serif;
-  --font-display-sc:"Sims Sans SC", "Sims Sans", "Fredoka", sans-serif;
-  --font-ui:        "Nunito", "Sims Sans", system-ui, sans-serif;
-  --font-body:      "Nunito", "Sims Sans", system-ui, sans-serif;
+  --font-display:   "Sims Sans", "Fredoka", "LXGW WenKai", "Nunito", system-ui, sans-serif;
+  --font-display-sc:"Sims Sans SC", "Sims Sans", "LXGW WenKai", "Fredoka", sans-serif;
+  --font-ui:        "Nunito", "Sims Sans", "LXGW WenKai", system-ui, sans-serif;
+  --font-body:      "Nunito", "Sims Sans", "LXGW WenKai", system-ui, sans-serif;
   --font-mono-ds:   "JetBrains Mono", ui-monospace, monospace;
 
   --fs-xs:   12px;
@@ -278,8 +303,8 @@
    SHARED BODY — font cascade + Obsidian radius tokens
    ============================================================================= */
 body {
-  --font-text-theme:      "Nunito", "Sims Sans", "Fredoka", system-ui, sans-serif;
-  --font-interface-theme: "Nunito", "Sims Sans", "Fredoka", system-ui, sans-serif;
+  --font-text-theme:      "Nunito", "Sims Sans", "LXGW WenKai", "Fredoka", system-ui, sans-serif;
+  --font-interface-theme: "Nunito", "Sims Sans", "LXGW WenKai", "Fredoka", system-ui, sans-serif;
   --font-monospace-theme: "JetBrains Mono", ui-monospace, monospace;
   --font-text-size: 16px;
 
@@ -300,7 +325,9 @@ body {
   --checkbox-border-color: var(--sim-teal-300);
 }
 
-.theme-light body {
+/* Obsidian puts `.theme-light` directly on <body>, so `.theme-light body`
+   never matches. Use `body.theme-light` to land the override. */
+body.theme-light {
   --bold-color:   var(--plumbob-600);
   --link-color:   var(--sim-teal-500);
 }
@@ -310,7 +337,7 @@ body {
    Obsidian's defaults otherwise override the design system scale.
    ============================================================================= */
 .markdown-preview-view h1, .markdown-source-view h1, .cm-header-1 {
-  font-family: "Sims Sans", "Fredoka", "Nunito", sans-serif !important;
+  font-family: "Sims Sans", "Fredoka", "LXGW WenKai", "Nunito", sans-serif !important;
   font-weight: 700;
   font-size: var(--fs-3xl);      /* 44px */
   line-height: 1.15;
@@ -318,14 +345,14 @@ body {
   margin: 0 0 var(--space-4);
 }
 .markdown-preview-view h2, .markdown-source-view h2, .cm-header-2 {
-  font-family: "Sims Sans", "Fredoka", "Nunito", sans-serif !important;
+  font-family: "Sims Sans", "Fredoka", "LXGW WenKai", "Nunito", sans-serif !important;
   font-weight: 700;
   font-size: var(--fs-2xl);      /* 32px */
   line-height: 1.25;
   margin: var(--space-6) 0 var(--space-3);
 }
 .markdown-preview-view h3, .markdown-source-view h3, .cm-header-3 {
-  font-family: "Sims Sans", "Fredoka", "Nunito", sans-serif !important;
+  font-family: "Sims Sans", "Fredoka", "LXGW WenKai", "Nunito", sans-serif !important;
   font-weight: 700;
   font-size: var(--fs-xl);       /* 24px */
   line-height: 1.3;
@@ -590,4 +617,9 @@ input[type="checkbox"] {
 .callout {
   border-radius: var(--radius-m);
   box-shadow: var(--gel-top), 0 2px 6px rgba(0,0,0,.2);
+}
+/* Light mode: the white inset gloss vanishes on ivory — swap for a soft
+   teal-tinted outer shadow so the callout still lifts off the page. */
+body.theme-light .callout {
+  box-shadow: 0 1px 4px rgba(9,74,99,.12), 0 4px 12px rgba(9,74,99,.06);
 }
