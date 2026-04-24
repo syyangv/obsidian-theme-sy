@@ -1,0 +1,328 @@
+/* =============================================================================
+   SY Theme — "Plumbob" — Sims 4-inspired Obsidian theme
+   Colors & Typography foundations
+   =============================================================================
+
+   The Sims 4's UI is unmistakable: a cool, glossy "teal-blue" chrome offset
+   by a vivid plumbob-green accent. Panels are layered gradients with soft
+   inner highlights; text is a confident, humanist sans. These tokens are
+   the single source of truth for both the Obsidian theme AND every preview
+   card, UI kit, and sample surface in this design system.
+   ============================================================================= */
+
+@font-face {
+  font-family: "Sims Sans";
+  src: url("fonts/Loucos_Lyne_-_thesimssansbold.otf") format("opentype");
+  font-weight: 700;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Sims Sans SC";
+  src: url("fonts/Loucos_Lyne_-_thesimssansboldsc.otf") format("opentype");
+  font-weight: 700;
+  font-display: swap;
+}
+
+:root {
+  /* ---------------------------------------------------------------------------
+     BRAND — the palette ripped from the in-game UI chrome
+     --------------------------------------------------------------------------- */
+
+  /* Plumbob green — the "active sim" spinner above every Sim's head.
+     Used for the accent, focus rings, success/confirm actions, task-done. */
+  --plumbob-50:  #e7fbd4;
+  --plumbob-100: #c9f59c;
+  --plumbob-200: #a7ea5c;
+  --plumbob-300: #7bda2e;
+  --plumbob-400: #50e131;   /* canonical plumbob */
+  --plumbob-500: #3fb820;
+  --plumbob-600: #2f8e16;
+  --plumbob-700: #236a10;
+
+  /* Sim-teal — the default UI chrome of Create-A-Sim and Live Mode. */
+  --sim-teal-50:  #e3f6fb;
+  --sim-teal-100: #bfe7f1;
+  --sim-teal-200: #7fc8dc;
+  --sim-teal-300: #3aa4c2;
+  --sim-teal-400: #1a7e9e;
+  --sim-teal-500: #0e5f7c;
+  --sim-teal-600: #094a63;
+  --sim-teal-700: #063749;
+  --sim-teal-800: #042634;
+  --sim-teal-900: #021821;
+
+  /* Sim-navy — the darker base of the CAS panels. Body background dark-mode. */
+  --sim-navy-500: #0a2a3d;
+  --sim-navy-600: #071e2e;
+  --sim-navy-700: #05161f;
+  --sim-navy-800: #030e16;
+
+  /* Build-mode sage — the greener panel color seen in Build Mode. */
+  --buildmode-300: #8fbf8f;
+  --buildmode-400: #6aa66a;
+  --buildmode-500: #4a824a;
+
+  /* Mood colors — from the emotion aura / plumbob states. */
+  --mood-happy:       #f4c842;   /* yellow */
+  --mood-flirty:      #ff6fae;   /* pink */
+  --mood-energized:   #50e131;   /* plumbob */
+  --mood-focused:     #3aa4c2;   /* sim teal */
+  --mood-inspired:    #c79bff;   /* lavender */
+  --mood-confident:   #4a9bff;   /* blue */
+  --mood-playful:     #ff8c3a;   /* orange */
+  --mood-uncomfortable:#b84a2e;  /* red */
+  --mood-sad:         #4a6b8a;   /* slate */
+  --mood-tense:       #d93030;   /* alert red */
+
+  /* Simoleon gold — currency, XP, premium. */
+  --simoleon-300: #ffe88a;
+  --simoleon-400: #f4c842;
+  --simoleon-500: #d4a017;
+
+  /* Neutrals — ivory paper + warm greys for light mode. */
+  --ivory-50:  #fbf8f1;
+  --ivory-100: #f5efdf;
+  --ivory-200: #e9dec4;
+  --ink-400:   #6f6552;
+  --ink-600:   #3d3628;
+  --ink-900:   #1b160b;
+
+  /* ---------------------------------------------------------------------------
+     SEMANTIC — what the rest of the system reaches for
+     --------------------------------------------------------------------------- */
+
+  --accent:          var(--plumbob-400);
+  --accent-hover:    var(--plumbob-300);
+  --accent-press:    var(--plumbob-500);
+  --accent-contrast: #0b2a0b;
+
+  --link:          var(--sim-teal-200);
+  --link-external: var(--mood-flirty);
+  --link-unres:    var(--mood-uncomfortable);
+
+  /* Status */
+  --status-success: var(--plumbob-400);
+  --status-warning: var(--mood-happy);
+  --status-danger:  var(--mood-tense);
+  --status-info:    var(--sim-teal-200);
+
+  /* ---------------------------------------------------------------------------
+     TYPOGRAPHY
+     "Sims Sans" is proprietary (EA). We substitute with Fredoka (humanist,
+     friendly, slightly rounded) for display and Nunito for UI/body — both
+     come from Google Fonts and match the in-game vibe closely.
+     --------------------------------------------------------------------------- */
+  --font-display:   "Sims Sans", "Fredoka", "Nunito", system-ui, sans-serif;
+  --font-display-sc:"Sims Sans SC", "Sims Sans", "Fredoka", sans-serif;
+  --font-ui:        "Nunito", "Sims Sans", system-ui, sans-serif;
+  --font-body:      "Nunito", "Sims Sans", system-ui, sans-serif;
+  --font-mono:      "JetBrains Mono", "Fira Code", ui-monospace, monospace;
+  --font-simlish:   "Sims Sans SC", "Sims Sans", cursive;
+
+  /* Type scale — friendly, rounded, slightly oversized like Sims tooltips */
+  --fs-xs:   12px;
+  --fs-sm:   13px;
+  --fs-base: 15px;
+  --fs-md:   17px;
+  --fs-lg:   20px;
+  --fs-xl:   24px;
+  --fs-2xl:  32px;
+  --fs-3xl:  44px;
+  --fs-4xl:  60px;
+
+  --fw-normal:   400;
+  --fw-medium:   500;
+  --fw-semibold: 600;
+  --fw-bold:     700;
+  --fw-black:    800;
+
+  --lh-tight: 1.15;
+  --lh-snug:  1.3;
+  --lh-body:  1.55;
+  --lh-loose: 1.75;
+
+  --ls-tight:  -0.01em;
+  --ls-normal: 0;
+  --ls-wide:   0.02em;
+  --ls-caps:   0.08em;
+
+  /* ---------------------------------------------------------------------------
+     SPACING, RADII, SHADOWS — "glossy gel panel" system
+     --------------------------------------------------------------------------- */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 22px;
+  --radius-xl: 32px;
+  --radius-pill: 999px;
+
+  /* The Sims 4 UI uses soft outer drop shadows PLUS an inner top highlight
+     to create that gel/gloss look. Panels almost always have both. */
+  --shadow-sm:  0 1px 2px rgba(0,0,0,.25);
+  --shadow-md:  0 6px 14px rgba(0,0,0,.35), 0 2px 4px rgba(0,0,0,.25);
+  --shadow-lg:  0 18px 36px rgba(0,0,0,.45), 0 4px 10px rgba(0,0,0,.3);
+  --shadow-xl:  0 32px 64px rgba(0,0,0,.55), 0 6px 16px rgba(0,0,0,.35);
+  --shadow-glow-plumbob: 0 0 24px rgba(80,225,49,.55), 0 0 4px rgba(80,225,49,.9);
+  --shadow-glow-teal:    0 0 20px rgba(58,164,194,.5),  0 0 3px rgba(58,164,194,.9);
+
+  /* Inner gloss — layered on top of panel gradients */
+  --inner-gloss-top:    inset 0 1px 0 rgba(255,255,255,.35);
+  --inner-gloss-bot:    inset 0 -1px 0 rgba(0,0,0,.25);
+  --inner-gel:          inset 0 1px 0 rgba(255,255,255,.4), inset 0 -2px 6px rgba(0,0,0,.35);
+
+  /* Signature panel gradients */
+  --panel-grad-teal: linear-gradient(180deg, var(--sim-teal-400) 0%, var(--sim-teal-600) 100%);
+  --panel-grad-navy: linear-gradient(180deg, var(--sim-teal-700) 0%, var(--sim-navy-700) 100%);
+  --panel-grad-light: linear-gradient(180deg, var(--ivory-50) 0%, var(--ivory-200) 100%);
+  --panel-grad-plumbob: linear-gradient(180deg, var(--plumbob-300) 0%, var(--plumbob-500) 100%);
+
+  /* Transitions — bouncy, like Sims UI pops */
+  --ease-pop:   cubic-bezier(.34, 1.56, .64, 1);
+  --ease-out:   cubic-bezier(.16, 1, .3, 1);
+  --ease-in:    cubic-bezier(.7, 0, .84, 0);
+  --dur-fast:   120ms;
+  --dur-base:   220ms;
+  --dur-slow:   420ms;
+}
+
+/* ============================================================================
+   DARK MODE — the "Live Mode at night" variant; rich navy+teal
+   ============================================================================ */
+.theme-dark, :root {
+  --bg-0:    var(--sim-navy-800);   /* outermost app bg */
+  --bg-1:    var(--sim-navy-700);   /* workspace */
+  --bg-2:    var(--sim-teal-700);   /* sidebars / panels */
+  --bg-3:    var(--sim-teal-600);   /* panels on panels */
+  --bg-field: rgba(255,255,255,.06);
+  --bg-cover: rgba(3, 14, 22, .72);
+
+  --border:       rgba(127, 200, 220, .22);
+  --border-hover: rgba(127, 200, 220, .5);
+
+  --fg-1: #f2fbff;   /* near-white with cool cast */
+  --fg-2: #cde5ef;
+  --fg-3: #7fa8bb;
+  --fg-on-accent: #0b2a0b;
+
+  --interactive:        rgba(58,164,194,.35);
+  --interactive-hover:  rgba(58,164,194,.55);
+  --interactive-accent: var(--plumbob-400);
+  --interactive-accent-hover: var(--plumbob-300);
+
+  --scrollbar-bg:            rgba(0,0,0,.25);
+  --scrollbar-thumb:         rgba(127,200,220,.35);
+  --scrollbar-thumb-active:  var(--plumbob-400);
+}
+
+/* ============================================================================
+   LIGHT MODE — the "sunny afternoon in Willow Creek" variant
+   ============================================================================ */
+.theme-light {
+  --bg-0:    var(--ivory-50);
+  --bg-1:    #ffffff;
+  --bg-2:    var(--ivory-100);
+  --bg-3:    var(--sim-teal-50);
+  --bg-field: #ffffff;
+  --bg-cover: rgba(4,38,52,.35);
+
+  --border:       rgba(9,74,99,.16);
+  --border-hover: rgba(9,74,99,.35);
+
+  --fg-1: var(--ink-900);
+  --fg-2: var(--ink-600);
+  --fg-3: var(--ink-400);
+  --fg-on-accent: #0b2a0b;
+
+  --interactive:        var(--sim-teal-100);
+  --interactive-hover:  var(--sim-teal-200);
+  --interactive-accent: var(--plumbob-500);
+  --interactive-accent-hover: var(--plumbob-400);
+
+  --scrollbar-bg:            rgba(0,0,0,.04);
+  --scrollbar-thumb:         rgba(9,74,99,.22);
+  --scrollbar-thumb-active:  var(--plumbob-500);
+}
+
+/* ============================================================================
+   BASE TYPOGRAPHIC ELEMENTS
+   ============================================================================ */
+body {
+  font-family: var(--font-body);
+  font-size:   var(--fs-base);
+  line-height: var(--lh-body);
+  color:       var(--fg-1);
+}
+
+h1, .h1 {
+  font-family: var(--font-display);
+  font-size: var(--fs-3xl);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--ls-tight);
+  margin: 0 0 var(--space-4);
+}
+h2, .h2 {
+  font-family: var(--font-display);
+  font-size: var(--fs-2xl);
+  font-weight: var(--fw-semibold);
+  line-height: var(--lh-snug);
+  margin: var(--space-6) 0 var(--space-3);
+}
+h3, .h3 {
+  font-family: var(--font-display);
+  font-size: var(--fs-xl);
+  font-weight: var(--fw-semibold);
+  margin: var(--space-5) 0 var(--space-2);
+}
+h4, .h4 { font-family: var(--font-ui); font-size: var(--fs-lg); font-weight: 700; }
+h5, .h5 { font-family: var(--font-ui); font-size: var(--fs-md); font-weight: 700; }
+h6, .h6 {
+  font-family: var(--font-ui); font-size: var(--fs-sm);
+  font-weight: 800; text-transform: uppercase; letter-spacing: var(--ls-caps);
+  color: var(--fg-3);
+}
+
+p    { line-height: var(--lh-body); }
+strong, b { color: var(--accent); font-weight: var(--fw-bold); }
+em   { color: var(--mood-flirty); font-style: italic; }
+a    { color: var(--link); text-decoration: none; border-bottom: 1px dashed currentColor; }
+a:hover { color: var(--accent); border-bottom-style: solid; }
+
+code, pre, kbd {
+  font-family: var(--font-mono);
+  font-size: .92em;
+}
+code {
+  background: var(--bg-field);
+  border: 1px solid var(--border);
+  padding: 0 .35em;
+  border-radius: var(--radius-xs);
+}
+blockquote {
+  border-left: 4px solid var(--accent);
+  background: linear-gradient(90deg, rgba(80,225,49,.08), transparent 60%);
+  padding: var(--space-3) var(--space-4);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  color: var(--fg-2);
+  font-style: italic;
+}
+
+hr { border: 0; border-top: 1px dashed var(--border); margin: var(--space-5) 0; }
+
+::selection { background: var(--plumbob-400); color: #0b2a0b; }
+
+/* The "plumbob focus" — every interactive gets this on :focus-visible */
+:focus-visible {
+  outline: 2px solid var(--plumbob-400);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
