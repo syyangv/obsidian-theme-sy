@@ -1,0 +1,364 @@
+/* =============================================================================
+   SY Theme — "Plumbob" — The Sims 4-inspired theme for Obsidian
+   Author: SY
+   Version: 0.1.0
+   ============================================================================= */
+
+@import url("https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=ZCOOL+KuaiLe&family=Noto+Sans+SC:wght@400;500;700;900&display=swap");
+
+@font-face {
+  font-family: "Sims Sans";
+  src: url("fonts/Loucos_Lyne_-_thesimssansbold.otf") format("opentype");
+  font-weight: 700;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Sims Sans SC";
+  src: url("fonts/Loucos_Lyne_-_thesimssansboldsc.otf") format("opentype");
+  font-weight: 700;
+  font-display: swap;
+}
+
+/* -----------------------------------------------------------------------------
+   TOKENS — the full brand palette + semantic ramp
+----------------------------------------------------------------------------- */
+:root {
+  /* Plumbob green — the accent */
+  --plumbob-300: #7bda2e;
+  --plumbob-400: #50e131;
+  --plumbob-500: #3fb820;
+  --plumbob-600: #2f8e16;
+
+  /* Sim-teal — chrome color */
+  --sim-teal-50:  #e3f6fb;
+  --sim-teal-100: #bfe7f1;
+  --sim-teal-200: #7fc8dc;
+  --sim-teal-300: #3aa4c2;
+  --sim-teal-400: #1a7e9e;
+  --sim-teal-500: #0e5f7c;
+  --sim-teal-600: #094a63;
+  --sim-teal-700: #063749;
+  --sim-teal-800: #042634;
+
+  /* Navy */
+  --sim-navy-700: #05161f;
+  --sim-navy-800: #030e16;
+
+  /* Moods — callout/emotion colors */
+  --mood-happy:     #f4c842;
+  --mood-flirty:    #ff6fae;
+  --mood-inspired:  #c79bff;
+  --mood-focused:   #3aa4c2;
+  --mood-tense:     #d93030;
+
+  /* Simoleon */
+  --simoleon: #f4c842;
+
+  /* Ivory */
+  --ivory-50: #fbf8f1;
+  --ivory-100: #f5efdf;
+  --ivory-200: #e9dec4;
+
+  /* Shared gloss */
+  --gel-top: inset 0 1px 0 rgba(255,255,255,.35);
+  --plumbob-glow: 0 0 22px rgba(80,225,49,.55), 0 0 3px rgba(80,225,49,.9);
+  --ease-pop: cubic-bezier(.34, 1.56, .64, 1);
+}
+
+/* =============================================================================
+   DARK MODE — "Live Mode at night"
+   ============================================================================= */
+.theme-dark {
+  /* Backgrounds */
+  --background-primary:       var(--sim-navy-700);
+  --background-primary-alt:   #07253a;
+  --background-secondary:     var(--sim-teal-700);
+  --background-secondary-alt: var(--sim-teal-600);
+  --background-modifier-border: rgba(127,200,220,.22);
+  --background-modifier-form-field: rgba(255,255,255,.06);
+  --background-modifier-box-shadow: rgba(0,0,0,.55);
+  --background-modifier-cover: rgba(3,14,22,.72);
+  --background-modifier-hover: rgba(127,200,220,.12);
+  --background-modifier-active: rgba(80,225,49,.18);
+
+  /* Text */
+  --text-normal:     #f2fbff;
+  --text-muted:      #cde5ef;
+  --text-faint:      #7fa8bb;
+  --text-on-accent:  #0b2a0b;
+  --text-accent:     var(--plumbob-400);
+  --text-accent-hover: var(--plumbob-300);
+  --text-selection:  rgba(80,225,49,.35);
+
+  /* Interactive */
+  --interactive-normal:        rgba(58,164,194,.25);
+  --interactive-hover:         rgba(58,164,194,.45);
+  --interactive-accent:        var(--plumbob-400);
+  --interactive-accent-hover:  var(--plumbob-300);
+
+  /* Scrollbar */
+  --scrollbar-active-thumb-bg: var(--plumbob-400);
+  --scrollbar-bg:              rgba(0,0,0,.25);
+  --scrollbar-thumb-bg:        rgba(127,200,220,.35);
+
+  /* Panel gradient */
+  --sy-panel-grad: linear-gradient(180deg, var(--sim-teal-600) 0%, var(--sim-teal-700) 100%);
+  --sy-workspace-grad: radial-gradient(ellipse at top, #0a2a3d 0%, var(--sim-navy-800) 70%);
+}
+
+/* =============================================================================
+   LIGHT MODE — "Willow Creek afternoon"
+   ============================================================================= */
+.theme-light {
+  --background-primary:       var(--ivory-50);
+  --background-primary-alt:   #ffffff;
+  --background-secondary:     var(--ivory-100);
+  --background-secondary-alt: var(--sim-teal-50);
+  --background-modifier-border: rgba(9,74,99,.16);
+  --background-modifier-form-field: #ffffff;
+  --background-modifier-hover: rgba(9,74,99,.06);
+  --background-modifier-active: rgba(80,225,49,.18);
+  --background-modifier-cover: rgba(4,38,52,.35);
+
+  --text-normal:    #1b160b;
+  --text-muted:     #3d3628;
+  --text-faint:     #6f6552;
+  --text-on-accent: #0b2a0b;
+  --text-accent:    var(--plumbob-500);
+  --text-accent-hover: var(--plumbob-400);
+  --text-selection: rgba(80,225,49,.35);
+
+  --interactive-normal:       var(--sim-teal-50);
+  --interactive-hover:        var(--sim-teal-100);
+  --interactive-accent:       var(--plumbob-500);
+  --interactive-accent-hover: var(--plumbob-400);
+
+  --sy-panel-grad: linear-gradient(180deg, #ffffff 0%, var(--ivory-100) 100%);
+  --sy-workspace-grad: linear-gradient(180deg, var(--ivory-50) 0%, var(--ivory-100) 100%);
+}
+
+/* =============================================================================
+   SHARED
+   ============================================================================= */
+body {
+  --font-text-theme:      "Nunito", "Sims Sans", system-ui, sans-serif;
+  --font-interface-theme: "Nunito", "Sims Sans", system-ui, sans-serif;
+  --font-monospace-theme: "JetBrains Mono", ui-monospace, monospace;
+  --font-text-size: 16px;
+
+  --radius-s: 8px;
+  --radius-m: 14px;
+  --radius-l: 22px;
+  --radius-xl: 32px;
+
+  --bold-color:           var(--plumbob-400);
+  --italic-color:         var(--mood-flirty);
+  --link-color:           var(--sim-teal-200);
+  --link-external-color:  var(--mood-flirty);
+  --link-unresolved-color: var(--mood-tense);
+  --blockquote-border-color: var(--plumbob-400);
+  --blockquote-color:     var(--text-muted);
+  --list-marker-color:    var(--plumbob-400);
+  --checkbox-color:       var(--plumbob-400);
+  --checkbox-border-color: var(--sim-teal-300);
+}
+
+.theme-light body {
+  --bold-color:   var(--plumbob-600);
+  --link-color:   var(--sim-teal-500);
+}
+
+/* Headings — display type */
+.markdown-preview-view h1, .markdown-source-view h1, .cm-header-1 {
+  font-family: "Sims Sans", "ZCOOL KuaiLe", "Fredoka", "Noto Sans SC", "Nunito", sans-serif !important;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+.markdown-preview-view h2, .markdown-source-view h2, .cm-header-2,
+.markdown-preview-view h3, .markdown-source-view h3, .cm-header-3 {
+  font-family: "Sims Sans", "ZCOOL KuaiLe", "Fredoka", "Noto Sans SC", "Nunito", sans-serif !important;
+  font-weight: 700;
+}
+
+/* Workspace */
+.workspace {
+  background: var(--sy-workspace-grad);
+}
+
+/* Sidebars */
+.workspace-ribbon,
+.workspace-split.mod-left-split,
+.workspace-split.mod-right-split {
+  background: var(--sy-panel-grad);
+  box-shadow: var(--gel-top), 0 8px 22px rgba(0,0,0,.35);
+  border: 1px solid var(--background-modifier-border);
+  border-radius: var(--radius-l);
+  margin: 8px;
+}
+
+/* Title bar + tab headers */
+.workspace-tab-header-container {
+  background: transparent;
+}
+.workspace-tab-header.is-active {
+  background: linear-gradient(180deg, var(--plumbob-400), var(--plumbob-500));
+  color: #0b2a0b;
+  border-radius: var(--radius-m) var(--radius-m) 0 0;
+  box-shadow: var(--gel-top);
+}
+.workspace-tab-header.is-active .workspace-tab-header-inner-title { color: #0b2a0b; font-weight: 700; }
+.workspace-tab-header:not(.is-active):hover {
+  background: var(--background-modifier-hover);
+}
+
+/* Buttons — the signature gel look */
+button, .mod-cta, button.mod-cta {
+  background: linear-gradient(180deg, var(--plumbob-400), var(--plumbob-500));
+  color: #0b2a0b;
+  border: 1px solid var(--plumbob-600);
+  border-radius: var(--radius-m);
+  font-weight: 700;
+  padding: 8px 16px;
+  box-shadow: var(--gel-top), 0 4px 10px rgba(0,0,0,.25);
+  transition: transform 120ms var(--ease-pop), box-shadow 120ms;
+}
+button:hover, button.mod-cta:hover {
+  background: linear-gradient(180deg, var(--plumbob-300), var(--plumbob-400));
+  box-shadow: var(--gel-top), 0 6px 14px rgba(0,0,0,.3), var(--plumbob-glow);
+  transform: translateY(-1px);
+}
+button:active { transform: scale(.97); }
+
+/* Inputs */
+input[type="text"], input[type="search"], textarea, .setting-item input {
+  background: var(--background-modifier-form-field);
+  border: 1px solid var(--background-modifier-border);
+  border-radius: var(--radius-m);
+  padding: 6px 12px;
+  font-family: var(--font-interface-theme);
+  color: var(--text-normal);
+}
+input[type="text"]:focus, input[type="search"]:focus, textarea:focus {
+  border-color: var(--plumbob-400);
+  box-shadow: 0 0 0 3px rgba(80,225,49,.25);
+  outline: none;
+}
+
+/* File explorer — nav items */
+.nav-file-title, .nav-folder-title {
+  border-radius: var(--radius-s);
+  padding: 4px 10px;
+  margin: 1px 4px;
+  transition: background 120ms;
+}
+.nav-file-title.is-active, .nav-folder-title.is-active {
+  background: linear-gradient(180deg, var(--plumbob-400), var(--plumbob-500));
+  color: #0b2a0b;
+  font-weight: 700;
+  box-shadow: var(--gel-top);
+}
+.nav-file-title:hover, .nav-folder-title:hover {
+  background: var(--background-modifier-hover);
+}
+
+/* Blockquotes — callouts */
+.markdown-preview-view blockquote,
+.markdown-source-view blockquote {
+  border-left: 4px solid var(--plumbob-400);
+  background: linear-gradient(90deg, rgba(80,225,49,.10), transparent 60%);
+  border-radius: 0 var(--radius-m) var(--radius-m) 0;
+  padding: 12px 18px;
+}
+
+/* Code blocks */
+.markdown-preview-view code, .markdown-source-view code,
+.cm-inline-code {
+  background: rgba(127,200,220,.12);
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 4px;
+  padding: 0 .35em;
+  color: var(--sim-teal-200);
+}
+.theme-light .cm-inline-code, .theme-light .markdown-preview-view code {
+  color: var(--sim-teal-500);
+}
+pre code, .HyperMD-codeblock {
+  background: rgba(0,0,0,.3) !important;
+  border-radius: var(--radius-m) !important;
+}
+
+/* Checkboxes */
+input[type="checkbox"] {
+  accent-color: var(--plumbob-400);
+  border-radius: 4px;
+}
+.task-list-item-checkbox:checked {
+  background: var(--plumbob-400);
+  border-color: var(--plumbob-500);
+  box-shadow: var(--plumbob-glow);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb-bg);
+  border-radius: var(--radius-pill, 999px);
+}
+::-webkit-scrollbar-thumb:hover { background: var(--scrollbar-active-thumb-bg); }
+::-webkit-scrollbar-track { background: var(--scrollbar-bg); }
+
+/* Modals */
+.modal {
+  background: var(--sy-panel-grad);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--gel-top), 0 28px 64px rgba(0,0,0,.5);
+  border: 1px solid var(--background-modifier-border);
+}
+.modal-bg { background: var(--background-modifier-cover); backdrop-filter: blur(6px); }
+
+/* Status bar */
+.status-bar {
+  background: linear-gradient(180deg, var(--sim-teal-600), var(--sim-teal-700));
+  border-top: 1px solid var(--background-modifier-border);
+  box-shadow: var(--gel-top);
+  color: var(--text-muted);
+  font-family: "Fredoka", sans-serif;
+}
+
+/* Selection */
+::selection { background: var(--text-selection); color: var(--text-normal); }
+
+/* Active note title glow — "the plumbob hovers over the active Sim" */
+.workspace-leaf.mod-active .view-header-title {
+  color: var(--plumbob-400);
+  text-shadow: var(--plumbob-glow);
+}
+
+/* Tag pills */
+.tag, a.tag {
+  background: linear-gradient(180deg, var(--plumbob-300), var(--plumbob-500));
+  color: #0b2a0b !important;
+  border-radius: 999px;
+  padding: 2px 10px;
+  font-weight: 700;
+  font-size: .82em;
+  border: 1px solid var(--plumbob-600);
+  box-shadow: var(--gel-top);
+  text-decoration: none !important;
+}
+
+/* Internal/external link accents */
+.external-link { color: var(--mood-flirty) !important; }
+.is-unresolved { color: var(--mood-tense) !important; }
+
+/* Callout variants mapping Obsidian's native types to Sims moods */
+.callout[data-callout="note"]     { --callout-color: 58,164,194;  --callout-icon: pencil; }
+.callout[data-callout="tip"]      { --callout-color: 80,225,49; }
+.callout[data-callout="success"]  { --callout-color: 80,225,49; }
+.callout[data-callout="question"] { --callout-color: 199,155,255; }
+.callout[data-callout="warning"]  { --callout-color: 244,200,66; }
+.callout[data-callout="danger"]   { --callout-color: 217,48,48; }
+.callout {
+  border-radius: var(--radius-m);
+  box-shadow: var(--gel-top), 0 2px 6px rgba(0,0,0,.2);
+}

@@ -1,0 +1,123 @@
+/* Shared card shell for all preview cards.
+   Cards are sized to 700 wide with variable heights; they host design-system
+   swatches, specimens, and small component demos. */
+@import url("https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=ZCOOL+KuaiLe&family=Noto+Sans+SC:wght@400;500;700;900&display=swap");
+
+@font-face {
+  font-family: "Sims Sans";
+  src: url("../fonts/Loucos_Lyne_-_thesimssansbold.otf") format("opentype");
+  font-weight: 700;
+  font-display: swap;
+  unicode-range: U+0000-007F, U+00A0-00FF, U+2000-206F, U+2070-209F, U+20A0-20CF, U+2100-214F;
+}
+@font-face {
+  font-family: "Sims Sans SC";
+  src: url("../fonts/Loucos_Lyne_-_thesimssansboldsc.otf") format("opentype");
+  font-weight: 700;
+  font-display: swap;
+  unicode-range: U+0000-007F, U+00A0-00FF, U+2000-206F, U+2070-209F, U+20A0-20CF, U+2100-214F;
+}
+
+/* Design tokens inlined from ../colors_and_type.css so preview cards are
+   self-contained (some card sandboxes don't resolve sibling @import paths). */
+:root {
+  --plumbob-50:  #e7fbd4; --plumbob-100: #c9f59c; --plumbob-200: #a7ea5c;
+  --plumbob-300: #7bda2e; --plumbob-400: #50e131; --plumbob-500: #3fb820;
+  --plumbob-600: #2f8e16; --plumbob-700: #236a10;
+
+  --sim-teal-50:  #e3f6fb; --sim-teal-100: #bfe7f1; --sim-teal-200: #7fc8dc;
+  --sim-teal-300: #3aa4c2; --sim-teal-400: #1a7e9e; --sim-teal-500: #0e5f7c;
+  --sim-teal-600: #094a63; --sim-teal-700: #063749; --sim-teal-800: #042634;
+  --sim-teal-900: #021821;
+
+  --sim-navy-500: #0a2a3d; --sim-navy-600: #071e2e; --sim-navy-700: #05161f; --sim-navy-800: #030e16;
+
+  --buildmode-300: #8fbf8f; --buildmode-400: #6aa66a; --buildmode-500: #4a824a;
+
+  --mood-happy: #f4c842; --mood-flirty: #ff6fae; --mood-energized: #50e131;
+  --mood-focused: #3aa4c2; --mood-inspired: #c79bff; --mood-confident: #4a9bff;
+  --mood-playful: #ff8c3a; --mood-uncomfortable: #b84a2e; --mood-sad: #4a6b8a;
+  --mood-tense: #d93030;
+
+  --simoleon-300: #ffe88a; --simoleon-400: #f4c842; --simoleon-500: #d4a017;
+
+  --ivory-50: #fbf8f1; --ivory-100: #f5efdf; --ivory-200: #e9dec4;
+  --ink-400: #6f6552; --ink-600: #3d3628; --ink-900: #1b160b;
+
+  --accent: var(--plumbob-400); --accent-hover: var(--plumbob-300); --accent-press: var(--plumbob-500);
+  --accent-contrast: #0b2a0b;
+  --link: var(--sim-teal-200); --link-external: var(--mood-flirty); --link-unres: var(--mood-uncomfortable);
+  --status-success: var(--plumbob-400); --status-warning: var(--mood-happy);
+  --status-danger: var(--mood-tense); --status-info: var(--sim-teal-200);
+
+  --font-display:   "Sims Sans", "ZCOOL KuaiLe", "Fredoka", "Noto Sans SC", "Nunito", system-ui, sans-serif;
+  --font-display-sc:"Sims Sans SC", "Sims Sans", "ZCOOL KuaiLe", "Fredoka", "Noto Sans SC", sans-serif;
+  --font-ui:        "Nunito", "Sims Sans", "Noto Sans SC", system-ui, sans-serif;
+  --font-body:      "Nunito", "Sims Sans", "Noto Sans SC", system-ui, sans-serif;
+  --font-mono:      "JetBrains Mono", "Fira Code", "Noto Sans SC", ui-monospace, monospace;
+  --font-simlish:   "Sims Sans SC", "Sims Sans", "ZCOOL KuaiLe", cursive;
+  --font-cjk-display: "ZCOOL KuaiLe", "Noto Sans SC", sans-serif;
+  --font-cjk-body:    "Noto Sans SC", "Nunito", sans-serif;
+
+  --fs-xs: 12px; --fs-sm: 13px; --fs-base: 15px; --fs-md: 17px; --fs-lg: 20px;
+  --fs-xl: 24px; --fs-2xl: 32px; --fs-3xl: 44px; --fs-4xl: 60px;
+  --fw-normal: 400; --fw-medium: 500; --fw-semibold: 600; --fw-bold: 700; --fw-black: 800;
+  --lh-tight: 1.15; --lh-snug: 1.3; --lh-body: 1.55; --lh-loose: 1.75;
+  --ls-tight: -0.01em; --ls-normal: 0; --ls-wide: 0.02em; --ls-caps: 0.08em;
+
+  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px;
+  --space-5: 24px; --space-6: 32px; --space-7: 48px; --space-8: 64px;
+
+  --radius-xs: 4px; --radius-sm: 8px; --radius-md: 14px;
+  --radius-lg: 22px; --radius-xl: 32px; --radius-pill: 999px;
+
+  --shadow-sm: 0 1px 2px rgba(0,0,0,.25);
+  --shadow-md: 0 6px 14px rgba(0,0,0,.35), 0 2px 4px rgba(0,0,0,.25);
+  --shadow-lg: 0 18px 36px rgba(0,0,0,.45), 0 4px 10px rgba(0,0,0,.3);
+  --shadow-xl: 0 32px 64px rgba(0,0,0,.55), 0 6px 16px rgba(0,0,0,.35);
+  --shadow-glow-plumbob: 0 0 24px rgba(80,225,49,.55), 0 0 4px rgba(80,225,49,.9);
+  --shadow-glow-teal:    0 0 20px rgba(58,164,194,.5),  0 0 3px rgba(58,164,194,.9);
+  --inner-gloss-top: inset 0 1px 0 rgba(255,255,255,.35);
+  --inner-gloss-bot: inset 0 -1px 0 rgba(0,0,0,.25);
+  --inner-gel: inset 0 1px 0 rgba(255,255,255,.4), inset 0 -2px 6px rgba(0,0,0,.35);
+  --panel-grad-teal: linear-gradient(180deg, var(--sim-teal-400) 0%, var(--sim-teal-600) 100%);
+  --panel-grad-navy: linear-gradient(180deg, var(--sim-teal-700) 0%, var(--sim-navy-700) 100%);
+  --panel-grad-light: linear-gradient(180deg, var(--ivory-50) 0%, var(--ivory-200) 100%);
+  --panel-grad-plumbob: linear-gradient(180deg, var(--plumbob-300) 0%, var(--plumbob-500) 100%);
+  --ease-pop: cubic-bezier(.34, 1.56, .64, 1);
+  --ease-out: cubic-bezier(.16, 1, .3, 1);
+  --ease-in:  cubic-bezier(.7, 0, .84, 0);
+  --dur-fast: 120ms; --dur-base: 220ms; --dur-slow: 420ms;
+
+  --bg-0: var(--sim-navy-800); --bg-1: var(--sim-navy-700);
+  --bg-2: var(--sim-teal-700); --bg-3: var(--sim-teal-600);
+  --bg-field: rgba(255,255,255,.06); --bg-cover: rgba(3,14,22,.72);
+  --border: rgba(127,200,220,.22); --border-hover: rgba(127,200,220,.5);
+  --fg-1: #f2fbff; --fg-2: #cde5ef; --fg-3: #7fa8bb; --fg-on-accent: #0b2a0b;
+}
+
+* { box-sizing: border-box; }
+html, body {
+  margin: 0; padding: 0;
+  font-family: var(--font-ui);
+  color: var(--fg-1);
+  background: var(--sim-navy-700);
+}
+body.card {
+  padding: 20px;
+  min-height: 150px;
+}
+.row { display: flex; gap: 12px; align-items: stretch; flex-wrap: wrap; }
+.col { display: flex; flex-direction: column; gap: 8px; }
+.mono { font-family: var(--font-mono); font-size: 11px; letter-spacing: .02em; }
+.label { font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--fg-3); font-weight: 700; }
+.pill {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 3px 10px; border-radius: 999px;
+  font-size: 11px; font-weight: 700;
+}
+.gel {
+  border-radius: var(--radius-lg);
+  box-shadow: var(--inner-gloss-top), var(--shadow-md);
+  border: 1px solid var(--border);
+}

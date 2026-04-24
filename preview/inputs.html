@@ -1,0 +1,25 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="_shared.css"><style>
+body.card { padding: 22px; display:flex; flex-direction:column; gap: 12px; }
+label { font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--fg-3); font-weight: 800; display: block; margin-bottom: 4px; }
+.field {
+  width: 100%; padding: 10px 14px; border-radius: 14px;
+  background: rgba(255,255,255,.06); color: var(--fg-1);
+  border: 1px solid var(--border);
+  font-family: var(--font-ui); font-size: 14px;
+}
+.field.focused { border-color: var(--plumbob-400); box-shadow: 0 0 0 3px rgba(80,225,49,.25); }
+.checkbox { display:flex; align-items:center; gap: 10px; font-size:14px; color: var(--fg-1); }
+.check { width: 22px; height: 22px; border-radius: 6px; background: linear-gradient(180deg,#50e131,#2f8e16); box-shadow: var(--inner-gloss-top), 0 0 14px rgba(80,225,49,.5); display:flex; align-items:center; justify-content:center; color: #0b2a0b; font-weight: 900; }
+.toggle { width: 46px; height: 26px; background: linear-gradient(180deg,#50e131,#2f8e16); border-radius: 999px; position: relative; box-shadow: var(--inner-gloss-top); }
+.toggle::after { content:""; position:absolute; top:3px; right:3px; width:20px; height:20px; background: #fff; border-radius:999px; box-shadow: 0 2px 4px rgba(0,0,0,.4); }
+.row3 { display:flex; gap: 14px; align-items:center; }
+</style></head><body class="card">
+<div>
+  <label>Note title</label>
+  <input class="field focused" value="Eliza's painting ideas">
+</div>
+<div class="row3">
+  <div class="checkbox"><div class="check">✓</div> Show plumbob glow</div>
+  <div class="checkbox" style="margin-left:20px"><div class="toggle"></div> Autosave every 30s</div>
+</div>
+</body></html>

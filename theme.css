@@ -1,11 +1,23 @@
 /* =============================================================================
    SY Theme — "Plumbob" — The Sims 4-inspired theme for Obsidian
    Author: SY
-   Version: 0.1.0
+   Version: 0.1.1
+
+   Tokens below are the merged contents of colors_and_type.css. Obsidian runs
+   in Electron and cannot @import another local CSS from a theme, so the design
+   tokens are inlined here. colors_and_type.css remains the design-system
+   reference (used by preview cards + the UI kit, which run in a browser).
+   Keep the two in sync manually — the :root block here is authoritative for
+   the live theme.
    ============================================================================= */
 
-@import url("https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap");
-
+/* -----------------------------------------------------------------------------
+   FONTS — all bundled locally. No Google @import: Obsidian's Restricted Mode
+   and offline vaults will break network font loads.
+   Fredoka + Nunito are not yet bundled in fonts/ — when the user drops them in,
+   uncomment the @font-face blocks below. Until then, the cascade falls through
+   to Sims Sans -> system-ui, which still reads correctly.
+----------------------------------------------------------------------------- */
 @font-face {
   font-family: "Sims Sans";
   src: url("fonts/Loucos_Lyne_-_thesimssansbold.otf") format("opentype");
@@ -18,18 +30,62 @@
   font-weight: 700;
   font-display: swap;
 }
+/* JetBrains Mono — bundled locally (variable + italic). */
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("fonts/JetBrainsMono-VariableFont_wght.ttf") format("truetype-variations");
+  font-weight: 100 800;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("fonts/JetBrainsMono-Italic-VariableFont_wght.ttf") format("truetype-variations");
+  font-weight: 100 800;
+  font-style: italic;
+  font-display: swap;
+}
 
-/* -----------------------------------------------------------------------------
-   TOKENS — the full brand palette + semantic ramp
------------------------------------------------------------------------------ */
+/* Fredoka — display face (variable weight + width). */
+@font-face {
+  font-family: "Fredoka";
+  src: url("fonts/Fredoka-VariableFont_wdth,wght.ttf") format("truetype-variations");
+  font-weight: 300 700;
+  font-stretch: 75% 125%;
+  font-style: normal;
+  font-display: swap;
+}
+/* Nunito — body + UI face (variable weight, normal + italic). */
+@font-face {
+  font-family: "Nunito";
+  src: url("fonts/Nunito-VariableFont_wght.ttf") format("truetype-variations");
+  font-weight: 200 1000;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Nunito";
+  src: url("fonts/Nunito-Italic-VariableFont_wght.ttf") format("truetype-variations");
+  font-weight: 200 1000;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* =============================================================================
+   TOKENS — merged from colors_and_type.css (authoritative copy)
+   ============================================================================= */
 :root {
-  /* Plumbob green — the accent */
+  /* --- Plumbob green — the accent -------------------------------------- */
+  --plumbob-50:  #e7fbd4;
+  --plumbob-100: #c9f59c;
+  --plumbob-200: #a7ea5c;
   --plumbob-300: #7bda2e;
-  --plumbob-400: #50e131;
+  --plumbob-400: #50e131;   /* canonical plumbob */
   --plumbob-500: #3fb820;
   --plumbob-600: #2f8e16;
+  --plumbob-700: #236a10;
 
-  /* Sim-teal — chrome color */
+  /* --- Sim-teal — default UI chrome ------------------------------------ */
   --sim-teal-50:  #e3f6fb;
   --sim-teal-100: #bfe7f1;
   --sim-teal-200: #7fc8dc;
@@ -39,37 +95,115 @@
   --sim-teal-600: #094a63;
   --sim-teal-700: #063749;
   --sim-teal-800: #042634;
+  --sim-teal-900: #021821;
 
-  /* Navy */
+  /* --- Navy ------------------------------------------------------------ */
+  --sim-navy-500: #0a2a3d;
+  --sim-navy-600: #071e2e;
   --sim-navy-700: #05161f;
   --sim-navy-800: #030e16;
 
-  /* Moods — callout/emotion colors */
-  --mood-happy:     #f4c842;
-  --mood-flirty:    #ff6fae;
-  --mood-inspired:  #c79bff;
-  --mood-focused:   #3aa4c2;
-  --mood-tense:     #d93030;
+  /* --- Build-mode sage ------------------------------------------------- */
+  --buildmode-300: #8fbf8f;
+  --buildmode-400: #6aa66a;
+  --buildmode-500: #4a824a;
 
-  /* Simoleon */
-  --simoleon: #f4c842;
+  /* --- Mood palette — full 10-step ride-along -------------------------- */
+  --mood-happy:        #f4c842;
+  --mood-flirty:       #ff6fae;
+  --mood-energized:    #50e131;
+  --mood-focused:      #3aa4c2;
+  --mood-inspired:     #c79bff;
+  --mood-confident:    #4a9bff;
+  --mood-playful:      #ff8c3a;
+  --mood-uncomfortable:#b84a2e;
+  --mood-sad:          #4a6b8a;
+  --mood-tense:        #d93030;
 
-  /* Ivory */
-  --ivory-50: #fbf8f1;
+  /* --- Simoleon gold --------------------------------------------------- */
+  --simoleon-300: #ffe88a;
+  --simoleon-400: #f4c842;
+  --simoleon-500: #d4a017;
+  --simoleon: var(--simoleon-400); /* alias */
+
+  /* --- Ivory + ink ----------------------------------------------------- */
+  --ivory-50:  #fbf8f1;
   --ivory-100: #f5efdf;
   --ivory-200: #e9dec4;
+  --ink-400:   #6f6552;
+  --ink-600:   #3d3628;
+  --ink-900:   #1b160b;
 
-  /* Shared gloss */
-  --gel-top: inset 0 1px 0 rgba(255,255,255,.35);
-  --plumbob-glow: 0 0 22px rgba(80,225,49,.55), 0 0 3px rgba(80,225,49,.9);
+  /* --- Semantic aliases ------------------------------------------------ */
+  --accent:          var(--plumbob-400);
+  --accent-hover:    var(--plumbob-300);
+  --accent-press:    var(--plumbob-500);
+  --accent-contrast: #0b2a0b;
+
+  --link-ds:          var(--sim-teal-200);
+  --link-external-ds: var(--mood-flirty);
+  --link-unres-ds:    var(--mood-uncomfortable);
+
+  --status-success: var(--plumbob-400);
+  --status-warning: var(--mood-happy);
+  --status-danger:  var(--mood-tense);
+  --status-info:    var(--sim-teal-200);
+
+  /* --- Type scale ------------------------------------------------------ */
+  --font-display:   "Sims Sans", "Fredoka", "Nunito", system-ui, sans-serif;
+  --font-display-sc:"Sims Sans SC", "Sims Sans", "Fredoka", sans-serif;
+  --font-ui:        "Nunito", "Sims Sans", system-ui, sans-serif;
+  --font-body:      "Nunito", "Sims Sans", system-ui, sans-serif;
+  --font-mono-ds:   "JetBrains Mono", ui-monospace, monospace;
+
+  --fs-xs:   12px;
+  --fs-sm:   13px;
+  --fs-base: 15px;
+  --fs-md:   17px;
+  --fs-lg:   20px;
+  --fs-xl:   24px;
+  --fs-2xl:  32px;
+  --fs-3xl:  44px;
+  --fs-4xl:  60px;
+
+  /* --- Spacing, radii, shadows ---------------------------------------- */
+  --space-1: 4px;  --space-2: 8px;  --space-3: 12px; --space-4: 16px;
+  --space-5: 24px; --space-6: 32px; --space-7: 48px; --space-8: 64px;
+
+  --radius-xs-ds: 4px;
+  --radius-sm-ds: 8px;
+  --radius-md-ds: 14px;
+  --radius-lg-ds: 22px;
+  --radius-xl-ds: 32px;
+  --radius-pill:  999px;
+
+  /* Gel-panel signature — inner gloss + outer shadow */
+  --gel-top:        inset 0 1px 0 rgba(255,255,255,.35);
+  --inner-gloss-top:inset 0 1px 0 rgba(255,255,255,.35);
+  --inner-gloss-bot:inset 0 -1px 0 rgba(0,0,0,.25);
+  --inner-gel:      inset 0 1px 0 rgba(255,255,255,.4), inset 0 -2px 6px rgba(0,0,0,.35);
+
+  --shadow-sm:  0 1px 2px rgba(0,0,0,.25);
+  --shadow-md:  0 6px 14px rgba(0,0,0,.35), 0 2px 4px rgba(0,0,0,.25);
+  --shadow-lg:  0 18px 36px rgba(0,0,0,.45), 0 4px 10px rgba(0,0,0,.3);
+  --shadow-xl:  0 32px 64px rgba(0,0,0,.55), 0 6px 16px rgba(0,0,0,.35);
+  --plumbob-glow:        0 0 22px rgba(80,225,49,.55), 0 0 3px rgba(80,225,49,.9);
+  --shadow-glow-plumbob: 0 0 24px rgba(80,225,49,.55), 0 0 4px rgba(80,225,49,.9);
+  --shadow-glow-teal:    0 0 20px rgba(58,164,194,.5),  0 0 3px rgba(58,164,194,.9);
+
+  /* --- Motion ---------------------------------------------------------- */
   --ease-pop: cubic-bezier(.34, 1.56, .64, 1);
+  --ease-out: cubic-bezier(.16, 1, .3, 1);
+  --dur-fast: 120ms;
+  --dur-base: 220ms;
+  --dur-slow: 420ms;
 }
 
 /* =============================================================================
    DARK MODE — "Live Mode at night"
    ============================================================================= */
 .theme-dark {
-  /* Backgrounds */
+  /* Obsidian interface vars */
   --background-primary:       var(--sim-navy-700);
   --background-primary-alt:   #07253a;
   --background-secondary:     var(--sim-teal-700);
@@ -81,7 +215,6 @@
   --background-modifier-hover: rgba(127,200,220,.12);
   --background-modifier-active: rgba(80,225,49,.18);
 
-  /* Text */
   --text-normal:     #f2fbff;
   --text-muted:      #cde5ef;
   --text-faint:      #7fa8bb;
@@ -90,18 +223,19 @@
   --text-accent-hover: var(--plumbob-300);
   --text-selection:  rgba(80,225,49,.35);
 
-  /* Interactive */
   --interactive-normal:        rgba(58,164,194,.25);
   --interactive-hover:         rgba(58,164,194,.45);
   --interactive-accent:        var(--plumbob-400);
   --interactive-accent-hover:  var(--plumbob-300);
 
-  /* Scrollbar */
   --scrollbar-active-thumb-bg: var(--plumbob-400);
   --scrollbar-bg:              rgba(0,0,0,.25);
   --scrollbar-thumb-bg:        rgba(127,200,220,.35);
 
-  /* Panel gradient */
+  /* Obsidian uses --color-accent-hsl internally for many hover/focus states.
+     Must be bare h,s,l (no hsl() wrapper). Plumbob-400 #50e131 ≈ 113 71% 53%. */
+  --color-accent-hsl: 113, 71%, 53%;
+
   --sy-panel-grad: linear-gradient(180deg, var(--sim-teal-600) 0%, var(--sim-teal-700) 100%);
   --sy-workspace-grad: radial-gradient(ellipse at top, #0a2a3d 0%, var(--sim-navy-800) 70%);
 }
@@ -133,16 +267,19 @@
   --interactive-accent:       var(--plumbob-500);
   --interactive-accent-hover: var(--plumbob-400);
 
+  /* Plumbob-500 #3fb820 ≈ 108 70% 43% */
+  --color-accent-hsl: 108, 70%, 43%;
+
   --sy-panel-grad: linear-gradient(180deg, #ffffff 0%, var(--ivory-100) 100%);
   --sy-workspace-grad: linear-gradient(180deg, var(--ivory-50) 0%, var(--ivory-100) 100%);
 }
 
 /* =============================================================================
-   SHARED
+   SHARED BODY — font cascade + Obsidian radius tokens
    ============================================================================= */
 body {
-  --font-text-theme:      "Nunito", "Sims Sans", system-ui, sans-serif;
-  --font-interface-theme: "Nunito", "Sims Sans", system-ui, sans-serif;
+  --font-text-theme:      "Nunito", "Sims Sans", "Fredoka", system-ui, sans-serif;
+  --font-interface-theme: "Nunito", "Sims Sans", "Fredoka", system-ui, sans-serif;
   --font-monospace-theme: "JetBrains Mono", ui-monospace, monospace;
   --font-text-size: 16px;
 
@@ -168,32 +305,69 @@ body {
   --link-color:   var(--sim-teal-500);
 }
 
-/* Headings — display type */
+/* =============================================================================
+   HEADINGS — display type + explicit size scale
+   Obsidian's defaults otherwise override the design system scale.
+   ============================================================================= */
 .markdown-preview-view h1, .markdown-source-view h1, .cm-header-1 {
   font-family: "Sims Sans", "Fredoka", "Nunito", sans-serif !important;
   font-weight: 700;
+  font-size: var(--fs-3xl);      /* 44px */
+  line-height: 1.15;
   letter-spacing: -0.01em;
+  margin: 0 0 var(--space-4);
 }
-.markdown-preview-view h2, .markdown-source-view h2, .cm-header-2,
+.markdown-preview-view h2, .markdown-source-view h2, .cm-header-2 {
+  font-family: "Sims Sans", "Fredoka", "Nunito", sans-serif !important;
+  font-weight: 700;
+  font-size: var(--fs-2xl);      /* 32px */
+  line-height: 1.25;
+  margin: var(--space-6) 0 var(--space-3);
+}
 .markdown-preview-view h3, .markdown-source-view h3, .cm-header-3 {
   font-family: "Sims Sans", "Fredoka", "Nunito", sans-serif !important;
   font-weight: 700;
+  font-size: var(--fs-xl);       /* 24px */
+  line-height: 1.3;
+  margin: var(--space-5) 0 var(--space-2);
+}
+.markdown-preview-view h4, .markdown-source-view h4, .cm-header-4 {
+  font-family: var(--font-ui);
+  font-size: var(--fs-lg);       /* 20px */
+  font-weight: 700;
+}
+.markdown-preview-view h5, .markdown-source-view h5, .cm-header-5 {
+  font-family: var(--font-ui);
+  font-size: var(--fs-md);       /* 17px */
+  font-weight: 700;
+}
+.markdown-preview-view h6, .markdown-source-view h6, .cm-header-6 {
+  font-family: var(--font-ui);
+  font-size: var(--fs-sm);       /* 13px */
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-faint);
 }
 
-/* Workspace */
+/* =============================================================================
+   WORKSPACE CHROME
+   ============================================================================= */
 .workspace {
   background: var(--sy-workspace-grad);
 }
 
-/* Sidebars */
+/* Sidebars — gel panels.
+   Border-radius moved onto the *inner* container so Obsidian's drag/resize
+   handles on .workspace-split itself stay square and hit-testable. */
 .workspace-ribbon,
-.workspace-split.mod-left-split,
-.workspace-split.mod-right-split {
+.workspace-split.mod-left-split .workspace-tabs,
+.workspace-split.mod-right-split .workspace-tabs {
   background: var(--sy-panel-grad);
   box-shadow: var(--gel-top), 0 8px 22px rgba(0,0,0,.35);
   border: 1px solid var(--background-modifier-border);
-  border-radius: var(--radius-l);
-  margin: 8px;
+  border-radius: var(--radius-m);
+  margin: 6px;
 }
 
 /* Title bar + tab headers */
@@ -206,13 +380,24 @@ body {
   border-radius: var(--radius-m) var(--radius-m) 0 0;
   box-shadow: var(--gel-top);
 }
-.workspace-tab-header.is-active .workspace-tab-header-inner-title { color: #0b2a0b; font-weight: 700; }
+.workspace-tab-header.is-active .workspace-tab-header-inner-title {
+  color: #0b2a0b;
+  font-weight: 700;
+}
 .workspace-tab-header:not(.is-active):hover {
   background: var(--background-modifier-hover);
 }
 
-/* Buttons — the signature gel look */
-button, .mod-cta, button.mod-cta {
+/* =============================================================================
+   BUTTONS — scoped to CTAs only.
+   A bare `button` selector would repaint every toolbar icon, context-menu
+   entry, settings toggle, and plugin chrome button. Limit to the call-to-
+   action class Obsidian stamps on primary buttons.
+   ============================================================================= */
+.mod-cta,
+button.mod-cta,
+.modal button.mod-cta,
+.dialog button.mod-cta {
   background: linear-gradient(180deg, var(--plumbob-400), var(--plumbob-500));
   color: #0b2a0b;
   border: 1px solid var(--plumbob-600);
@@ -222,14 +407,31 @@ button, .mod-cta, button.mod-cta {
   box-shadow: var(--gel-top), 0 4px 10px rgba(0,0,0,.25);
   transition: transform 120ms var(--ease-pop), box-shadow 120ms;
 }
-button:hover, button.mod-cta:hover {
+.mod-cta:hover,
+button.mod-cta:hover {
   background: linear-gradient(180deg, var(--plumbob-300), var(--plumbob-400));
   box-shadow: var(--gel-top), 0 6px 14px rgba(0,0,0,.3), var(--plumbob-glow);
   transform: translateY(-1px);
 }
-button:active { transform: scale(.97); }
+.mod-cta:active,
+button.mod-cta:active {
+  transform: scale(.97);
+}
 
-/* Inputs */
+/* Warning/destructive CTAs keep Sims red */
+.mod-warning,
+button.mod-warning {
+  background: linear-gradient(180deg, #e85050, var(--mood-tense));
+  color: #fff;
+  border: 1px solid #8a1a1a;
+  border-radius: var(--radius-m);
+  font-weight: 700;
+  box-shadow: var(--gel-top), 0 4px 10px rgba(0,0,0,.25);
+}
+
+/* =============================================================================
+   INPUTS
+   ============================================================================= */
 input[type="text"], input[type="search"], textarea, .setting-item input {
   background: var(--background-modifier-form-field);
   border: 1px solid var(--background-modifier-border);
@@ -244,7 +446,9 @@ input[type="text"]:focus, input[type="search"]:focus, textarea:focus {
   outline: none;
 }
 
-/* File explorer — nav items */
+/* =============================================================================
+   FILE EXPLORER
+   ============================================================================= */
 .nav-file-title, .nav-folder-title {
   border-radius: var(--radius-s);
   padding: 4px 10px;
@@ -261,7 +465,9 @@ input[type="text"]:focus, input[type="search"]:focus, textarea:focus {
   background: var(--background-modifier-hover);
 }
 
-/* Blockquotes — callouts */
+/* =============================================================================
+   BLOCKQUOTES + CALLOUTS
+   ============================================================================= */
 .markdown-preview-view blockquote,
 .markdown-source-view blockquote {
   border-left: 4px solid var(--plumbob-400);
@@ -270,7 +476,9 @@ input[type="text"]:focus, input[type="search"]:focus, textarea:focus {
   padding: 12px 18px;
 }
 
-/* Code blocks */
+/* =============================================================================
+   CODE — inline + blocks, theme-aware
+   ============================================================================= */
 .markdown-preview-view code, .markdown-source-view code,
 .cm-inline-code {
   background: rgba(127,200,220,.12);
@@ -281,13 +489,25 @@ input[type="text"]:focus, input[type="search"]:focus, textarea:focus {
 }
 .theme-light .cm-inline-code, .theme-light .markdown-preview-view code {
   color: var(--sim-teal-500);
+  background: rgba(9,74,99,.06);
 }
-pre code, .HyperMD-codeblock {
+
+/* Dark mode: deep navy block. Light mode: tinted teal so the ivory page
+   doesn't get a muddy brown panel painted over it. */
+.theme-dark pre code,
+.theme-dark .HyperMD-codeblock {
   background: rgba(0,0,0,.3) !important;
   border-radius: var(--radius-m) !important;
 }
+.theme-light pre code,
+.theme-light .HyperMD-codeblock {
+  background: rgba(9,74,99,.08) !important;
+  border-radius: var(--radius-m) !important;
+}
 
-/* Checkboxes */
+/* =============================================================================
+   CHECKBOXES
+   ============================================================================= */
 input[type="checkbox"] {
   accent-color: var(--plumbob-400);
   border-radius: 4px;
@@ -298,16 +518,20 @@ input[type="checkbox"] {
   box-shadow: var(--plumbob-glow);
 }
 
-/* Scrollbar */
+/* =============================================================================
+   SCROLLBAR
+   ============================================================================= */
 ::-webkit-scrollbar { width: 10px; height: 10px; }
 ::-webkit-scrollbar-thumb {
   background: var(--scrollbar-thumb-bg);
-  border-radius: var(--radius-pill, 999px);
+  border-radius: var(--radius-pill);
 }
 ::-webkit-scrollbar-thumb:hover { background: var(--scrollbar-active-thumb-bg); }
 ::-webkit-scrollbar-track { background: var(--scrollbar-bg); }
 
-/* Modals */
+/* =============================================================================
+   MODALS + STATUS BAR
+   ============================================================================= */
 .modal {
   background: var(--sy-panel-grad);
   border-radius: var(--radius-xl);
@@ -316,25 +540,24 @@ input[type="checkbox"] {
 }
 .modal-bg { background: var(--background-modifier-cover); backdrop-filter: blur(6px); }
 
-/* Status bar */
 .status-bar {
   background: linear-gradient(180deg, var(--sim-teal-600), var(--sim-teal-700));
   border-top: 1px solid var(--background-modifier-border);
   box-shadow: var(--gel-top);
   color: var(--text-muted);
-  font-family: "Fredoka", sans-serif;
+  font-family: "Nunito", "Fredoka", sans-serif;
 }
 
-/* Selection */
+/* =============================================================================
+   ACCENTS — selection, active title, tags, links
+   ============================================================================= */
 ::selection { background: var(--text-selection); color: var(--text-normal); }
 
-/* Active note title glow — "the plumbob hovers over the active Sim" */
 .workspace-leaf.mod-active .view-header-title {
   color: var(--plumbob-400);
   text-shadow: var(--plumbob-glow);
 }
 
-/* Tag pills */
 .tag, a.tag {
   background: linear-gradient(180deg, var(--plumbob-300), var(--plumbob-500));
   color: #0b2a0b !important;
@@ -347,17 +570,23 @@ input[type="checkbox"] {
   text-decoration: none !important;
 }
 
-/* Internal/external link accents */
 .external-link { color: var(--mood-flirty) !important; }
 .is-unresolved { color: var(--mood-tense) !important; }
 
-/* Callout variants mapping Obsidian's native types to Sims moods */
+/* =============================================================================
+   CALLOUTS — mapped to mood colors
+   ============================================================================= */
 .callout[data-callout="note"]     { --callout-color: 58,164,194;  --callout-icon: pencil; }
 .callout[data-callout="tip"]      { --callout-color: 80,225,49; }
 .callout[data-callout="success"]  { --callout-color: 80,225,49; }
 .callout[data-callout="question"] { --callout-color: 199,155,255; }
 .callout[data-callout="warning"]  { --callout-color: 244,200,66; }
 .callout[data-callout="danger"]   { --callout-color: 217,48,48; }
+.callout[data-callout="example"]  { --callout-color: 255,140,58; }   /* playful */
+.callout[data-callout="quote"]    { --callout-color: 74,107,138; }   /* sad */
+.callout[data-callout="bug"]      { --callout-color: 184,74,46; }    /* uncomfortable */
+.callout[data-callout="info"]     { --callout-color: 74,155,255; }   /* confident */
+.callout[data-callout="abstract"] { --callout-color: 255,111,174; }  /* flirty */
 .callout {
   border-radius: var(--radius-m);
   box-shadow: var(--gel-top), 0 2px 6px rgba(0,0,0,.2);

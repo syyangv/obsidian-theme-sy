@@ -1,0 +1,15 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="_shared.css"><style>
+body { background: radial-gradient(ellipse at top, #0a2a3d 0%, var(--sim-navy-800) 70%); padding: 24px; }
+.stage { display: grid; grid-template-columns: 1.4fr 1fr; gap: 18px; }
+.panel { padding: 22px; background: var(--panel-grad-navy); border-radius: var(--radius-lg); box-shadow: var(--inner-gloss-top), var(--shadow-md); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; }
+.panel.light { background: var(--panel-grad-light); }
+.panel.light .wordmark text { fill: var(--sim-teal-700) !important; }
+.wordmark { height: 60px; }
+.mark { height: 80px; width: 80px; animation: spin 8s linear infinite; filter: drop-shadow(var(--shadow-glow-plumbob)); }
+@keyframes spin { from { transform: rotateY(0) } to { transform: rotateY(360deg) } }
+</style></head><body>
+<div class="stage">
+  <div class="panel"><img class="wordmark" src="../assets/logo-wordmark.svg" alt=""></div>
+  <div class="panel"><img class="mark" src="../assets/plumbob.svg" alt=""></div>
+</div>
+</body></html>

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 80" width="320" height="80" role="img" aria-label="Plumbob">
+  <defs>
+    <linearGradient id="wm-pb" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#c9f59c"></stop>
+      <stop offset="55%" stop-color="#50e131"></stop>
+      <stop offset="100%" stop-color="#2f8e16"></stop>
+    </linearGradient>
+  </defs>
+  <g transform="translate(8,12)">
+    <polygon points="28,0 10,32 28,38" fill="#2f8e16"></polygon>
+    <polygon points="28,0 46,32 28,38" fill="url(#wm-pb)"></polygon>
+    <polygon points="10,32 28,38 46,32 28,56" fill="#236a10"></polygon>
+    <polygon points="28,38 46,32 28,56" fill="#3fb820"></polygon>
+  </g>
+  <text x="78" y="56" font-family="Fredoka, Nunito, sans-serif" font-weight="700" font-size="44" fill="#e3f6fb" letter-spacing="-1">Plumbob</text>
+</svg>

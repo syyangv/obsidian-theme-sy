@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 96" width="64" height="96" role="img" aria-label="Plumbob">
+  <defs>
+    <linearGradient id="pb-face" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#c9f59c"></stop>
+      <stop offset="55%" stop-color="#50e131"></stop>
+      <stop offset="100%" stop-color="#2f8e16"></stop>
+    </linearGradient>
+    <linearGradient id="pb-side" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#3fb820"></stop>
+      <stop offset="100%" stop-color="#236a10"></stop>
+    </linearGradient>
+    <radialGradient id="pb-glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0%" stop-color="#50e131" stop-opacity=".55"></stop>
+      <stop offset="100%" stop-color="#50e131" stop-opacity="0"></stop>
+    </radialGradient>
+  </defs>
+  <ellipse cx="32" cy="82" rx="22" ry="6" fill="url(#pb-glow)"></ellipse>
+  
+  <polygon points="32,6 10,46 32,54" fill="url(#pb-side)"></polygon>
+  
+  <polygon points="32,6 54,46 32,54" fill="url(#pb-face)"></polygon>
+  
+  <polygon points="10,46 32,54 54,46 32,86" fill="#236a10" opacity=".85"></polygon>
+  <polygon points="32,54 54,46 32,86" fill="url(#pb-side)"></polygon>
+  
+  <polygon points="32,8 22,26 32,30 42,26" fill="#ffffff" opacity=".45"></polygon>
+</svg>

@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Plumbob — Obsidian UI Kit</title>
+<link rel="stylesheet" href="../../colors_and_type.css"/>
+<style>
+  html, body { margin: 0; padding: 0; height: 100%; font-family: var(--font-ui); color: var(--fg-1); background: radial-gradient(ellipse at top, #0a2a3d 0%, var(--sim-navy-800) 80%); overflow: hidden; }
+  .app { display: grid; grid-template-columns: 56px 280px 1fr 300px; grid-template-rows: 1fr 32px; height: 100vh; gap: 10px; padding: 10px; box-sizing: border-box; }
+  .ribbon { grid-row: 1; background: linear-gradient(180deg,#094a63,#042634); border-radius: var(--radius-lg); box-shadow: var(--inner-gloss-top), var(--shadow-md); border: 1px solid var(--border); display: flex; flex-direction: column; align-items: center; padding: 10px 0; gap: 6px; }
+  .ribbon-logo img { width: 36px; height: 36px; filter: drop-shadow(var(--shadow-glow-plumbob)); margin-bottom: 8px; }
+  .ribbon-btn { width: 40px; height: 40px; border-radius: 12px; background: transparent; border: 1px solid transparent; color: var(--fg-2); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 120ms var(--ease-pop); }
+  .ribbon-btn:hover { background: rgba(127,200,220,.15); color: var(--fg-1); }
+  .ribbon-btn.is-active { background: linear-gradient(180deg,#50e131,#2f8e16); color: #0b2a0b; box-shadow: var(--inner-gloss-top), 0 0 18px rgba(80,225,49,.55); border-color: #2f8e16; }
+
+  .explorer { grid-row: 1; background: linear-gradient(180deg,#094a63,#042634); border-radius: var(--radius-lg); box-shadow: var(--inner-gloss-top), var(--shadow-md); border: 1px solid var(--border); display: flex; flex-direction: column; overflow: hidden; }
+  .explorer-head { display: flex; align-items: center; justify-content: space-between; padding: 14px 16px 8px; }
+  .vault-name { font-family: var(--font-display); font-weight: 700; font-size: 16px; color: var(--fg-1); }
+  .iconbtn { background: rgba(127,200,220,.1); border: 1px solid var(--border); color: var(--fg-2); width: 28px; height: 28px; border-radius: 8px; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; }
+  .iconbtn:hover { background: rgba(127,200,220,.25); color: var(--plumbob-400); }
+  .explorer-search { display: flex; align-items: center; gap: 8px; padding: 6px 12px; margin: 0 12px 10px; background: rgba(255,255,255,.05); border: 1px solid var(--border); border-radius: 12px; color: var(--fg-3); }
+  .explorer-search input { flex: 1; background: transparent; border: 0; color: var(--fg-1); font-family: inherit; font-size: 13px; outline: none; }
+  .file-tree { flex: 1; overflow-y: auto; padding: 0 6px 10px; }
+  .folder { margin-bottom: 2px; }
+  .folder-head { display: flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 8px; color: var(--fg-2); font-size: 12px; text-transform: uppercase; letter-spacing: .06em; font-weight: 800; cursor: pointer; }
+  .folder-head:hover { background: rgba(127,200,220,.1); }
+  .folder-body { padding-left: 6px; }
+  .file { display: flex; align-items: center; gap: 8px; padding: 5px 10px; margin: 1px 4px; border-radius: 8px; color: var(--fg-2); cursor: pointer; font-size: 13px; transition: all 120ms; }
+  .file:hover { background: rgba(127,200,220,.12); color: var(--fg-1); }
+  .file.is-active { background: linear-gradient(180deg,#50e131,#2f8e16); color: #0b2a0b; font-weight: 700; box-shadow: var(--inner-gloss-top); }
+
+  .editor-pane { grid-row: 1; background: linear-gradient(180deg,#063749,#030e16); border-radius: var(--radius-lg); box-shadow: var(--inner-gloss-top), var(--shadow-md); border: 1px solid var(--border); display: flex; flex-direction: column; overflow: hidden; }
+  .tabbar { display: flex; align-items: center; gap: 4px; padding: 8px 10px 0; border-bottom: 1px solid var(--border); background: rgba(0,0,0,.18); }
+  .tab { display: flex; align-items: center; gap: 6px; padding: 8px 14px; border-radius: 14px 14px 0 0; color: var(--fg-3); font-size: 13px; background: transparent; cursor: pointer; border: 1px solid transparent; border-bottom: 0; }
+  .tab.is-active { background: linear-gradient(180deg,#50e131,#3fb820); color: #0b2a0b; font-weight: 700; box-shadow: var(--inner-gloss-top); border-color: #2f8e16; }
+  .tab-close { opacity: .5; padding: 0 4px; }
+  .tab-new { background: transparent; border: 0; color: var(--fg-2); cursor: pointer; padding: 6px; border-radius: 8px; }
+  .tab-new:hover { background: rgba(127,200,220,.15); }
+  .editor-actions { display: flex; gap: 6px; padding: 0 4px; }
+
+  .editor-scroll { flex: 1; overflow-y: auto; padding: 40px 80px 60px; max-width: 900px; width: 100%; margin: 0 auto; box-sizing: border-box; }
+  .breadcrumb { font-family: var(--font-mono); font-size: 11px; color: var(--fg-3); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 6px; }
+  .editor-title { font-family: var(--font-display); font-size: 48px; font-weight: 700; line-height: 1.05; letter-spacing: -0.01em; color: var(--plumbob-400); text-shadow: var(--shadow-glow-plumbob); margin: 0 0 16px; }
+  .frontmatter { display: flex; flex-direction: column; gap: 4px; background: rgba(127,200,220,.08); border: 1px solid var(--border); border-radius: 12px; padding: 10px 14px; margin-bottom: 28px; }
+  .fm-row { display: flex; align-items: center; gap: 10px; font-size: 13px; }
+  .fm-key { font-family: var(--font-mono); color: var(--fg-3); width: 80px; font-size: 12px; }
+  .fm-val { color: var(--fg-1); }
+  .fm-mood { display: inline-flex; align-items: center; padding: 2px 10px; border-radius: 999px; background: linear-gradient(180deg,#e3cbff,#c79bff); color: #3b1f6a; font-weight: 800; font-size: 11px; text-transform: uppercase; letter-spacing: .06em; box-shadow: var(--inner-gloss-top); }
+  .fm-gold { color: var(--simoleon-400); font-weight: 700; font-family: var(--font-mono); }
+
+  .editor-body { color: var(--fg-1); line-height: 1.65; font-size: 16px; }
+  .editor-body h2 { font-family: var(--font-display); font-weight: 600; font-size: 28px; margin: 28px 0 10px; color: var(--fg-1); }
+  .editor-body h3 { font-family: var(--font-display); font-weight: 600; font-size: 22px; margin: 22px 0 8px; color: var(--fg-1); }
+  .editor-body p { margin: 0 0 14px; }
+  .editor-body strong { color: var(--plumbob-400); font-weight: 700; }
+  .editor-body em { color: var(--mood-flirty); }
+  .editor-body a { color: var(--sim-teal-200); text-decoration: none; border-bottom: 1px dashed currentColor; }
+  .editor-body a:hover { color: var(--plumbob-400); border-bottom-style: solid; }
+  .editor-body ul { padding-left: 20px; }
+  .editor-body li { margin-bottom: 4px; }
+  .editor-body li::marker { color: var(--plumbob-400); }
+  .editor-body blockquote { border-left: 4px solid var(--plumbob-400); background: linear-gradient(90deg, rgba(80,225,49,.1), transparent 60%); padding: 14px 20px; border-radius: 0 var(--radius-md) var(--radius-md) 0; font-style: italic; color: var(--fg-2); margin: 18px 0; }
+  .editor-body pre { background: rgba(0,0,0,.35); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 16px 20px; font-family: var(--font-mono); font-size: 13px; line-height: 1.55; color: var(--sim-teal-100); overflow-x: auto; box-shadow: var(--inner-gloss-top); }
+  .editor-body pre code { background: transparent; border: 0; padding: 0; }
+  .editor-body code { background: rgba(127,200,220,.12); border: 1px solid var(--border); border-radius: 4px; padding: 1px 6px; font-family: var(--font-mono); font-size: .9em; color: var(--sim-teal-200); }
+
+  .callout { display: flex; gap: 12px; align-items: flex-start; padding: 14px 18px; border-radius: var(--radius-md); box-shadow: var(--inner-gloss-top), var(--shadow-sm); border-left: 4px solid; margin: 18px 0; }
+  .c-tip { background: rgba(80,225,49,.12); border-color: #50e131; }
+  .c-icon { width: 36px; height: 36px; flex: 0 0 auto; }
+  .c-title { font-family: var(--font-display); font-weight: 700; color: var(--plumbob-400); margin-bottom: 2px; font-size: 14px; }
+
+  .tagrow { display: flex; gap: 8px; margin-top: 28px; flex-wrap: wrap; }
+  .tag { padding: 3px 12px; border-radius: 999px; background: linear-gradient(180deg,#7bda2e,#3fb820); color: #0b2a0b; font-weight: 800; font-size: 12px; border: 1px solid #2f8e16; box-shadow: var(--inner-gloss-top); }
+
+  .rightpanel { grid-row: 1; background: linear-gradient(180deg,#094a63,#042634); border-radius: var(--radius-lg); box-shadow: var(--inner-gloss-top), var(--shadow-md); border: 1px solid var(--border); padding: 16px; overflow-y: auto; }
+  .rp-head { font-family: var(--font-display); font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: var(--fg-3); font-weight: 800; margin: 16px 0 8px; }
+  .rp-head:first-child { margin-top: 0; }
+  .rp-props { background: rgba(127,200,220,.08); border: 1px solid var(--border); border-radius: 12px; padding: 10px 12px; }
+  .rp-row { display: flex; justify-content: space-between; font-size: 13px; padding: 4px 0; color: var(--fg-1); }
+  .rp-row span:first-child { color: var(--fg-3); font-family: var(--font-mono); font-size: 12px; }
+  .rp-mood { color: var(--mood-inspired) !important; font-weight: 700; }
+  .rp-list { display: flex; flex-direction: column; gap: 2px; }
+  .rp-item { display: flex; align-items: center; gap: 8px; padding: 6px 10px; border-radius: 8px; font-size: 13px; color: var(--fg-2); cursor: pointer; }
+  .rp-item img { width: 14px; height: 18px; }
+  .rp-item:hover { background: rgba(127,200,220,.12); color: var(--fg-1); }
+  .rp-graph { background: rgba(0,0,0,.3); border: 1px solid var(--border); border-radius: 12px; padding: 8px; }
+
+  .statusbar { grid-row: 2; grid-column: 1 / -1; background: linear-gradient(180deg,#0e5f7c,#05161f); border-radius: var(--radius-md); box-shadow: var(--inner-gloss-top), var(--shadow-sm); border: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; padding: 0 14px; font-family: var(--font-display); font-size: 12px; color: var(--fg-2); }
+  .sb-left, .sb-right { display: flex; align-items: center; gap: 8px; }
+  .sb-plumbob { width: 18px; height: 24px; cursor: pointer; transition: transform 220ms var(--ease-pop); animation: spin 6s linear infinite; }
+  .sb-plumbob:hover { transform: scale(1.15); filter: drop-shadow(0 0 6px rgba(80,225,49,.8)); }
+  @keyframes spin { from { transform: rotateY(0); } to { transform: rotateY(360deg); } }
+  .sb-vault { font-weight: 700; color: var(--fg-1); }
+  .sb-sep { opacity: .4; }
+  .sb-mood { display: inline-flex; align-items: center; gap: 4px; color: var(--mood-inspired); font-weight: 700; }
+  .sb-mood img { width: 14px; height: 14px; }
+
+  .palette-backdrop { position: fixed; inset: 0; background: rgba(3,14,22,.72); backdrop-filter: blur(8px); display: flex; align-items: flex-start; justify-content: center; padding-top: 15vh; z-index: 100; animation: fade-in 220ms var(--ease-out); }
+  @keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+  .palette { width: 560px; background: linear-gradient(180deg,#094a63,#042634); border-radius: var(--radius-xl); border: 1px solid var(--border); box-shadow: var(--inner-gloss-top), 0 32px 64px rgba(0,0,0,.6); overflow: hidden; animation: pop-in 280ms var(--ease-pop); }
+  @keyframes pop-in { from { opacity: 0; transform: scale(.92); } to { opacity: 1; transform: scale(1); } }
+  .palette-head { display: flex; align-items: center; gap: 10px; padding: 14px 18px; border-bottom: 1px solid var(--border); }
+  .palette-pb { width: 22px; height: 30px; filter: drop-shadow(var(--shadow-glow-plumbob)); animation: spin 4s linear infinite; }
+  .palette-head input { flex: 1; background: transparent; border: 0; outline: none; color: var(--fg-1); font-family: var(--font-display); font-size: 18px; }
+  .palette-head input::placeholder { color: var(--fg-3); }
+  .kbd { font-family: var(--font-mono); font-size: 11px; padding: 2px 8px; background: rgba(255,255,255,.1); border: 1px solid var(--border); border-radius: 6px; color: var(--fg-3); }
+  .palette-list { max-height: 360px; overflow-y: auto; padding: 6px; }
+  .palette-item { display: flex; align-items: center; gap: 10px; padding: 10px 14px; border-radius: 12px; color: var(--fg-2); cursor: pointer; font-size: 14px; }
+  .palette-item:hover, .palette-item:first-child:not(.cmd) { background: linear-gradient(180deg,#50e131,#3fb820); color: #0b2a0b; font-weight: 700; box-shadow: var(--inner-gloss-top); }
+  .palette-item:hover svg { color: #0b2a0b; }
+  .palette-folder { margin-left: auto; font-family: var(--font-mono); font-size: 11px; opacity: .7; }
+  .palette-divider { height: 1px; background: var(--border); margin: 6px 14px; }
+  .palette-empty { padding: 20px; text-align: center; color: var(--fg-3); font-style: italic; }
+  .cmd-ico { width: 20px; display: inline-flex; justify-content: center; }
+  .palette-kbd { margin-left: auto; font-family: var(--font-mono); font-size: 11px; opacity: .7; }
+</style>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+</head>
+<body>
+<div id="root" data-screen-label="01 Obsidian Vault"></div>
+
+<script type="text/babel" src="Sidebar.jsx"></script>
+<script type="text/babel" src="EditorPane.jsx"></script>
+<script type="text/babel" src="RightPanel.jsx"></script>
+<script type="text/babel" src="StatusBar.jsx"></script>
+
+<script type="text/babel">
+const { useState } = React;
+
+const FILES = [
+  { id: "eliza", folder: "Sims", title: "Eliza Pancakes", mood: "Inspired", sim: "Eliza Pancakes", tags: ["sims","ideas","focus"], simoleons: 4820,
+    intro: "Ambient notes about the Pancakes household. Who lives here, what they do all day, and why Eliza won't stop painting." },
+  { id: "bob",   folder: "Sims", title: "Bob Pancakes",   mood: "Playful",  sim: "Bob Pancakes",   tags: ["sims","family"], simoleons: 2140,
+    intro: "Bob spends his afternoons in the garden. He's terrible at it, but nothing stops him." },
+  { id: "goth",  folder: "Sims", title: "Bella Goth",     mood: "Flirty",   sim: "Bella Goth",     tags: ["sims","legacy","mystery"], simoleons: 89200,
+    intro: "Where did she go? Still unclear." },
+  { id: "villa", folder: "Lots", title: "Willow Villa",   mood: "Focused",  sim: "—",              tags: ["lot","blueprint"], simoleons: 120000,
+    intro: "A three-bedroom on a 40×30 lot. Notes on the front garden and the loft expansion." },
+  { id: "park",  folder: "Lots", title: "Magnolia Park",  mood: "Energized",sim: "—",              tags: ["lot","community"], simoleons: 0,
+    intro: "Community lot — needs a bigger gym and at least one more easel corner." },
+  { id: "mb1",   folder: "Moodboards", title: "Cottagecore kitchen", mood: "Happy", sim: "—", tags: ["moodboard","kitchen"], simoleons: 0,
+    intro: "Wooden counters, pastels, succulents, copper pots." },
+  { id: "mb2",   folder: "Moodboards", title: "Neon plumbob party",  mood: "Energized", sim: "—", tags: ["moodboard","party"], simoleons: 0,
+    intro: "Plumbobs, neon tubes, a DJ booth. Loud but in a good way." },
+];
+
+function App() {
+  const [activeFile, setActiveFile] = useState("eliza");
+  const [activeTab, setActiveTab] = useState("files");
+  const [paletteOpen, setPaletteOpen] = useState(false);
+  const file = FILES.find(f => f.id === activeFile);
+
+  React.useEffect(() => {
+    const onKey = (e) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") { e.preventDefault(); setPaletteOpen(true); }
+      if (e.key === "Escape") setPaletteOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, []);
+
+  return (
+    <div className="app">
+      <Ribbon activeTab={activeTab} setActiveTab={setActiveTab}/>
+      <FileExplorer files={FILES} activeFile={activeFile} setActiveFile={setActiveFile}/>
+      <EditorPane file={file}/>
+      <RightPanel file={file}/>
+      <StatusBar file={file} togglePalette={() => setPaletteOpen(!paletteOpen)}/>
+      {paletteOpen && (
+        <CommandPalette
+          files={FILES}
+          onClose={() => setPaletteOpen(false)}
+          onOpenFile={setActiveFile}
+        />
+      )}
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App/>);
+</script>
+</body>
+</html>

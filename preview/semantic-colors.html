@@ -1,0 +1,27 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="_shared.css"><style>
+body.card { display:grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.pane { padding: 16px; border-radius: 16px; box-shadow: var(--inner-gloss-top), var(--shadow-sm); display:flex; flex-direction:column; gap:10px; }
+.pane.dark  { background: linear-gradient(180deg,#094a63,#05161f); color:#f2fbff; }
+.pane.light { background: linear-gradient(180deg,#fff,#f5efdf); color:#1b160b; }
+.row2 { display:flex; gap:8px; align-items:center; font-size:12px; }
+.sw { width: 18px; height: 18px; border-radius: 5px; box-shadow: var(--inner-gloss-top), var(--shadow-sm); }
+.mono { opacity: .8; }
+.title { font-family: var(--font-display); font-weight:700; font-size:14px; }
+</style></head><body class="card">
+<div class="pane dark">
+  <div class="title">Dark mode</div>
+  <div class="row2"><span class="sw" style="background:#50e131"></span>accent <span class="mono">#50e131</span></div>
+  <div class="row2"><span class="sw" style="background:#7fc8dc"></span>link <span class="mono">#7fc8dc</span></div>
+  <div class="row2"><span class="sw" style="background:#ff6fae"></span>link-external <span class="mono">#ff6fae</span></div>
+  <div class="row2"><span class="sw" style="background:#d93030"></span>danger <span class="mono">#d93030</span></div>
+  <div class="row2"><span class="sw" style="background:#f4c842"></span>warning <span class="mono">#f4c842</span></div>
+</div>
+<div class="pane light">
+  <div class="title">Light mode</div>
+  <div class="row2"><span class="sw" style="background:#3fb820"></span>accent <span class="mono">#3fb820</span></div>
+  <div class="row2"><span class="sw" style="background:#0e5f7c"></span>link <span class="mono">#0e5f7c</span></div>
+  <div class="row2"><span class="sw" style="background:#ff6fae"></span>link-external <span class="mono">#ff6fae</span></div>
+  <div class="row2"><span class="sw" style="background:#d93030"></span>danger <span class="mono">#d93030</span></div>
+  <div class="row2"><span class="sw" style="background:#d4a017"></span>warning <span class="mono">#d4a017</span></div>
+</div>
+</body></html>
